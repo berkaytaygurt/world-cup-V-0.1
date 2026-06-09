@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kupa Kapışması</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root">
+
+  <div class="topbar">
+    <div class="logo">KUPA <span>KAPIŞMASI</span></div>
+    <div class="progress-strip">
+      <span class="rp-label" id="roundLabel">LOBİ</span>
+      <div class="rp-dot" id="rp1"></div>
+      <div class="rp-dot" id="rp2"></div>
+      <div class="rp-dot" id="rp3"></div>
+      <div class="rp-dot" id="rp4"></div>
+      <div class="rp-dot" id="rp5"></div>
+      <div class="rp-dot" id="rp6"></div>
+      <div class="rp-dot" id="rp7"></div>
+      <div class="rp-dot" id="rp8"></div>
+    </div>
+  </div>
+
+  <div class="left-sidebar">
+    <div class="panel-title">LİDERLİK TABLOSU</div>
+    
+    <div class="sb-player">
+      <div class="sb-header"><div class="sb-info"><div class="sb-avatar av-y">SEN</div><div class="sb-name">Sen</div></div><div class="sb-pts" id="pts-you">0</div></div>
+      <div class="sb-bar-wrap"><div class="sb-bar" id="bar-you" style="width:0%; background:var(--accent)"></div></div>
+    </div>
+
+    <div class="sb-player">
+      <div class="sb-header"><div class="sb-info"><div class="sb-avatar av-a">A</div><div class="sb-name">Ahmet</div></div><div class="sb-pts" id="pts-ahmet">0</div></div>
+      <div class="sb-bar-wrap"><div class="sb-bar" id="bar-ahmet" style="width:0%; background:var(--red)"></div></div>
+    </div>
+
+    <div class="sb-player">
+      <div class="sb-header"><div class="sb-info"><div class="sb-avatar av-c">C</div><div class="sb-name">Can</div></div><div class="sb-pts" id="pts-can">0</div></div>
+      <div class="sb-bar-wrap"><div class="sb-bar" id="bar-can" style="width:0%; background:var(--blue)"></div></div>
+    </div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="stage-main">
+
+    <div class="round-end" id="roundEnd">
+      <div class="re-icon" id="re-icon">🎯</div>
+      <div class="re-title" id="re-title">TUR BİTTİ</div>
+      <div class="re-sub" id="re-sub"></div>
+      <div class="re-scores">
+        <div class="re-sc"><div class="re-sc-name">Sen</div><div class="re-sc-val" id="re-you">0</div></div>
+        <div class="re-sc"><div class="re-sc-name">Ahmet</div><div class="re-sc-val" id="re-ahmet">0</div></div>
+        <div class="re-sc"><div class="re-sc-name">Can</div><div class="re-sc-val" id="re-can">0</div></div>
+      </div>
+      <button class="cta" id="re-btn" style="margin-top:16px;font-size:16px;padding:12px 36px">Devam Et →</button>
+    </div>
+
+    <!-- Lobi -->
+    <div class="screen on" id="sc-lobby">
+      <div class="phase-title" style="margin-top:20px; font-size:32px;">Yarışmaya Hoş Geldin</div>
+      <p style="color:var(--muted);font-size:15px;margin:8px 0 0;text-align:center">8 turda botlarla kapış, puan topla, şampiyon ol.</p>
+      <div class="lobby-grid">
+        <div class="lc"><div class="lc-num">1</div><div class="lc-name">Kahoot</div><div class="lc-desc">Hızlı bilgi soruları</div></div>
+        <div class="lc"><div class="lc-num">2</div><div class="lc-name">Sayı Tahmini</div><div class="lc-desc">Yaklaşan kazanır</div></div>
+        <div class="lc"><div class="lc-num">3</div><div class="lc-name">Ülke Bulmaca</div><div class="lc-desc">İpuçlarıyla bul</div></div>
+        <div class="lc"><div class="lc-num">4</div><div class="lc-name">İlk 11 Kur</div><div class="lc-desc">Kadroyu oluştur</div></div>
+        <div class="lc"><div class="lc-num">5</div><div class="lc-name">DK Grubu</div><div class="lc-desc">Eksik takımı bul</div></div>
+        <div class="lc"><div class="lc-num">6</div><div class="lc-name">İmpostor</div><div class="lc-desc">Yalancıyı yakala</div></div>
+        <div class="lc"><div class="lc-num">7</div><div class="lc-name">Ben Kimim?</div><div class="lc-desc">Sorularla tahmin et</div></div>
+        <div class="lc"><div class="lc-num">8</div><div class="lc-name">Çizim</div><div class="lc-desc">Çiz, botlar tahmin</div></div>
+      </div>
+      <button class="cta" onclick="G.start()">MÜSABAKAYI BAŞLAT</button>
+    </div>
+
+    <!-- Geri sayım -->
+    <div class="screen" id="sc-cd">
+      <div class="cd-num" id="cd-num" style="margin-top:60px;">3</div>
+      <div class="cd-sub" id="cd-sub"></div>
+    </div>
+
+    <!-- Kahoot -->
+    <div class="screen" id="sc-kahoot">
+      <div class="phase-top">
+        <div><div class="phase-label" id="kh-label">TUR 1 · SORU 1/8</div><div class="phase-title">Futbol Bilgi Yarışması</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="kh-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="kh-tnum">20</div></div>
+      </div>
+      <div class="q-card">
+        <div class="prog-wrap"><div class="prog-bar" id="kh-prog" style="width:100%"></div></div>
+        <div class="q-num" id="kh-qnum">SORU 1 / 8</div>
+        <div class="q-text" id="kh-qtext"></div>
+        <div class="q-grid" id="kh-opts"></div>
+      </div>
+    </div>
+
+    <!-- Sayı Tahmini -->
+    <div class="screen" id="sc-num">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 2 · SAYI TAHMİNİ</div><div class="phase-title">Yaklaşan Kazanır</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="nm-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="nm-tnum">30</div></div>
+      </div>
+      <div class="q-card">
+        <div class="num-q" id="nm-q"></div>
+        <div style="font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:14px">En yakın tahmin 100 puan kazanır</div>
+        <div class="guesses-row" id="nm-guesses"></div>
+      </div>
+      <div class="ans-box">
+        <div class="ans-label">Tahminin</div>
+        <div class="ans-row">
+          <input class="ans-input" type="number" id="nm-input" placeholder="Sayıyı gir..." min="0" onkeydown="if(event.key==='Enter')G.numSubmit()">
+          <button class="ans-btn" id="nm-btn" onclick="G.numSubmit()">TAHMİN ET</button>
+        </div>
+      </div>
+      <div class="result-box" id="nm-result">
+        <div class="rb-label">Sonuç</div><div class="rb-val" id="nm-rval"></div><div class="rb-sub" id="nm-rsub"></div>
+      </div>
+    </div>
+
+    <!-- Ülke Bulmaca -->
+    <div class="screen" id="sc-country">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 3 · ÜLKE BULMACA</div><div class="phase-title">Gizli Ülkeyi Bul</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="ct-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="ct-tnum">--</div></div>
+      </div>
+      <div class="clue-list" id="ct-clues"></div>
+      <div class="ans-box" style="margin-top:12px">
+        <div class="ans-label">Cevabın</div>
+        <div class="ans-row">
+          <input class="ans-input" id="ct-input" placeholder="Ülke adını yaz..." onkeydown="if(event.key==='Enter')G.ctryGuess()" autocomplete="off">
+          <button class="ans-btn" onclick="G.ctryGuess()">TAHMİN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- İlk 11 -->
+    <div class="screen" id="sc-f11">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 4 · İLK 11</div><div class="phase-title" id="f11-title">Brezilya Kadrosu</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="f11-tfg" cx="23" cy="23" r="22" style="stroke-dasharray:138"/></svg><div class="timer-num" id="f11-tnum">120</div></div>
+      </div>
+      <div class="f11-wrap">
+        <div class="pitch-cont">
+          <svg class="pitch-svg" viewBox="0 0 270 360" id="pitch-svg">
+            <defs><linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a4a1a"/><stop offset="50%" stop-color="#1e5620"/><stop offset="100%" stop-color="#1a4a1a"/></linearGradient></defs>
+            <rect width="270" height="360" fill="url(#grass)" rx="8"/>
+            <rect x="20" y="20" width="230" height="320" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5" rx="4"/>
+            <line x1="20" y1="180" x2="250" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <circle cx="135" cy="180" r="38" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
+            <circle cx="135" cy="180" r="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="65" y="20" width="140" height="52" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+            <rect x="65" y="288" width="140" height="52" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+            <rect x="100" y="20" width="70" height="24" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+            <rect x="100" y="316" width="70" height="24" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="f11-panel">
+          <div class="f11-progress"><span id="f11-placed">0</span>/11</div>
+          <div class="f11-sel-label">Seçili: <span class="f11-sel-val" id="f11-sel">Mevki seç</span></div>
+          <input class="ans-input" id="f11-search" placeholder="Oyuncu ara..." oninput="G.f11Search()" autocomplete="off" style="margin-top:4px; padding:10px;">
+          <div class="sugg-list" id="f11-sugg" style="margin-top:4px"></div>
+          <button class="cta" onclick="G.f11Submit()" style="margin-top:auto;font-size:15px;padding:11px 24px;letter-spacing:1px; width:100%;">KADROYU TESLİM ET</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DK Grup -->
+    <div class="screen" id="sc-dkgroup">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 5 · DK GRUBU</div><div class="phase-title" id="dk-title">Gizli Takımı Bul</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="dk-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="dk-tnum">60</div></div>
+      </div>
+      <div class="q-card" style="text-align:center">
+        <div style="font-size:18px; color:var(--accent); margin-bottom:16px; font-weight:700" id="dk-year"></div>
+        <div id="dk-teams" style="margin-bottom:20px"></div>
+        <div class="ans-box" style="margin-top:0">
+          <div class="ans-label">Gizli takımı tahmin et</div>
+          <div class="ans-row">
+            <input class="ans-input" id="dk-input" placeholder="Takım adı..." onkeydown="if(event.key==='Enter')G.dkgGuess()" autocomplete="off">
+            <button class="ans-btn" onclick="G.dkgGuess()">TAHMİN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- İmpostor -->
+    <div class="screen" id="sc-impostor">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 6 · İMPOSTOR</div><div class="phase-title">Yalancıyı Yakala</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="imp-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="imp-tnum">30</div></div>
+      </div>
+      <div class="q-card" style="text-align:center">
+        <div style="font-size:18px; color:var(--accent); margin-bottom:16px; font-weight:700">Gizli Futbolcu: <span id="imp-secret"></span></div>
+        <div id="imp-clue-section">
+          <div class="ans-label" style="margin-bottom:8px">İpucunu yaz</div>
+          <div class="ans-row" style="justify-content:center">
+            <input class="ans-input" id="imp-clue-input" placeholder="Bir ipucu ver..." onkeydown="if(event.key==='Enter')G.impSubmitClue()" autocomplete="off">
+            <button class="ans-btn" onclick="G.impSubmitClue()">GÖNDER</button>
+          </div>
+        </div>
+        <div id="imp-vote-section" style="display:none; margin-top:20px">
+          <div class="ans-label" style="margin-bottom:12px">Kim yalancı?</div>
+          <div class="q-grid" id="imp-vote-btns"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ben Kimim? -->
+    <div class="screen" id="sc-whoami">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 7 · BEN KİMİM?</div><div class="phase-title">Sorularla Kendini Bul</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="wa-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="wa-tnum">180</div></div>
+      </div>
+      <div class="q-card" style="text-align:center">
+        <div style="font-size:18px; color:var(--accent); margin-bottom:16px; font-weight:700">Senin Gizli Futbolcun: <span id="wa-your-player"></span></div>
+        <div id="wa-active-section">
+          <div class="ans-label" style="margin-bottom:8px">Bir evet/hayır sorusu sor</div>
+          <div class="ans-row" style="justify-content:center">
+            <input class="ans-input" id="wa-question-input" placeholder="Soru sor..." onkeydown="if(event.key==='Enter')G.waAskQuestion()" autocomplete="off">
+            <button class="ans-btn" onclick="G.waAskQuestion()">SOR</button>
+          </div>
+          <div class="ans-label" style="margin-top:12px; margin-bottom:8px">Tahminin varsa yaz</div>
+          <div class="ans-row" style="justify-content:center">
+            <input class="ans-input" id="wa-guess-input" placeholder="Futbolcu adı..." onkeydown="if(event.key==='Enter')G.waGuess()" autocomplete="off">
+            <button class="ans-btn" onclick="G.waGuess()">TAHMİN ET</button>
+          </div>
+        </div>
+        <div id="wa-done-section" style="display:none; color:var(--green); font-size:20px; margin-top:20px">✅ Tahmin ettin! Diğerleri bekleniyor...</div>
+      </div>
+    </div>
+
+    <!-- Çizim -->
+    <div class="screen" id="sc-draw">
+      <div class="phase-top">
+        <div><div class="phase-label">TUR 8 · ÇİZİM FİNALİ</div><div class="phase-title">Çiz, Botlar Tahmin Etsin</div></div>
+        <div class="timer-ring"><svg viewBox="0 0 46 46"><circle class="timer-bg" cx="23" cy="23" r="22"/><circle class="timer-fg" id="dr-tfg" cx="23" cy="23" r="22"/></svg><div class="timer-num" id="dr-tnum">90</div></div>
+      </div>
+      <div style="width:100%;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:var(--font-h);font-size:13px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">Kelime: <strong id="dr-word" style="color:var(--accent);font-size:18px">?</strong></div>
+        <canvas class="draw-canvas" id="draw-cv" width="460" height="300"></canvas>
+        <div class="draw-toolbar">
+          <div class="clr-dot on" style="background:#111" data-c="#111" onclick="G.drColor(this)"></div>
+          <div class="clr-dot" style="background:#d62929" data-c="#d62929" onclick="G.drColor(this)"></div>
+          <div class="clr-dot" style="background:#2980d6" data-c="#2980d6" onclick="G.drColor(this)"></div>
+          <div class="clr-dot" style="background:#27ae60" data-c="#27ae60" onclick="G.drColor(this)"></div>
+          <div class="clr-dot" style="background:#e67e22" data-c="#e67e22" onclick="G.drColor(this)"></div>
+          <div class="clr-dot" style="background:#8e44ad" data-c="#8e44ad" onclick="G.drColor(this)"></div>
+          <button class="sz-btn on" data-s="4" onclick="G.drSize(this)">İNCE</button>
+          <button class="sz-btn" data-s="10" onclick="G.drSize(this)">ORTA</button>
+          <button class="sz-btn" data-s="22" onclick="G.drSize(this)">KALIN</button>
+          <button class="clr-btn" onclick="G.drClear()">🗑 Temizle</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final -->
+    <div class="screen" id="sc-final">
+      <div class="big-label" id="fin-title" style="margin:40px 0 8px;color:var(--accent)">ŞAMPİYON!</div>
+      <div style="font-size:16px;color:var(--muted);margin-bottom:24px" id="fin-sub"></div>
+      <div class="podium" id="fin-podium"></div>
+      <button class="cta" onclick="location.reload()" style="margin-top:32px">TEKRAR OYNA</button>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="right-sidebar">
+    <div class="panel-title">MAÇ AKIŞI</div>
+    <div class="feed-body" id="feed"></div>
+  </div>
+
+</div>
+<script src="script.js" defer></script>
+</body>
+</html>
